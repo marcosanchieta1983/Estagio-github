@@ -1,0 +1,38 @@
+using System;
+using System.Globalization;
+using System.Globalization;
+
+namespace TesteEstagio04
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            decimal sp = 67836.43m;
+            decimal rj = 36678.66m;
+            decimal mg = 29229.88m;
+            decimal es = 27165.48m;
+            decimal outros = 19849.53m;
+
+            
+            decimal total = sp + rj + mg + es + outros;
+
+            
+            decimal spPerc = (sp / total) * 100;
+            decimal rjPerc = (rj / total) * 100;
+            decimal mgPerc = (mg / total) * 100;
+            decimal esPerc = (es / total) * 100;
+            decimal outrosPerc = (outros / total) * 100;
+
+
+            Console.WriteLine("Percentual de representação de cada estado:");
+
+            Console.WriteLine("SP: %" + spPerc.ToString("F2", CultureInfo.InvariantCulture));
+            Console.WriteLine("RJ: %" + rjPerc.ToString("F2", CultureInfo.InvariantCulture));
+            Console.WriteLine("MG: %" + mgPerc.ToString("F2", CultureInfo.InvariantCulture));
+            Console.WriteLine("ES: %" + esPerc.ToString("F2", CultureInfo.InvariantCulture));
+            Console.WriteLine("Outros: %" + outrosPerc.ToString("F2", CultureInfo.InvariantCulture));
+
+        }
+    }
+}
