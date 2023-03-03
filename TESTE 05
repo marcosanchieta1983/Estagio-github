@@ -1,0 +1,31 @@
+using System;
+
+namespace TesteEstagio05
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+
+            Console.Write("Digite um texto: ");
+            string texto = Console.ReadLine();
+
+            char[] vetorChar = texto.ToCharArray();
+            int esq = 0;
+            int dir = vetorChar.Length - 1;
+
+            while (esq < dir)
+            {
+                char temp = vetorChar[esq];
+                vetorChar[esq] = vetorChar[dir];
+                vetorChar[dir] = temp;
+                esq++;
+                dir--;
+            }
+
+            string textoInverso = new string(vetorChar);
+            Console.WriteLine("O texto invertido ficou assim: " + textoInverso);
+
+        }
+    }
+}
