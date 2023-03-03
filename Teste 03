@@ -1,0 +1,73 @@
+using System;
+using System.IO;
+using Newtonsoft.Json;
+
+
+
+namespace TesteEstagio03
+{
+    public class Program
+    {
+        public static object JsonConvert { get; private set; }
+
+        public static void Main()
+        {
+            
+            string json = File.ReadAllText(@"C:\Users\User\Desktop\TESTE VAGA ESTAGIO\dados.json");
+
+            
+            dynamic faturamentoMensal = JsonConvert.DeserializeObject(json);
+
+            
+            decimal menorFaturamento = decimal.MaxValue;
+            foreach (var faturamentoDiario in faturamentoMensal.faturamentoDiario)
+            {
+                if (faturamentoDiario.valor == null) continue; 
+
+                if (faturamentoDiario.valor < menorFaturamento)
+                {
+                    menorFaturamento = faturamentoDiario.valor;
+                }
+            }
+            Console.WriteLine("Menor faturamento diário: " + menorFaturamento);
+
+            
+            decimal maiorFaturamento = decimal.MinValue;
+            foreach (var faturamentoDiario in faturamentoMensal.faturamentoDiario)
+            {
+                if (faturamentoDiario.valor == null) continue; 
+
+                if (faturamentoDiario.valor > maiorFaturamento)
+                {
+                    maiorFaturamento = faturamentoDiario.valor;
+                }
+            }
+            Console.WriteLine("Maior faturamento diário: " + maiorFaturamento);
+
+            
+            decimal somaFaturamento = 0;
+            int quantidadeDiasComFaturamento = 0;
+            foreach (var faturamentoDiario in faturamentoMensal.faturamentoDiario)
+            {
+                if (faturamentoDiario.valor == null) continue; 
+
+                somaFaturamento += faturamentoDiario.valor;
+                quantidadeDiasComFaturamento++;
+            }
+            decimal mediaMensal = somaFaturamento / quantidadeDiasComFaturamento;
+
+            
+            int diasAcimaDaMedia = 0;
+            foreach (var faturamentoDiario in faturamentoMensal.faturamentoDiario)
+            {
+                if (faturamentoDiario.valor == null) continue; 
+
+                if (faturamentoDiario.valor > mediaMensal)
+                {
+                    diasAcimaDaMedia++;
+                }
+            }
+            Console.WriteLine("Número de dias com faturamento acima da média: " + diasAcimaDaMedia);
+        }
+    }
+}
